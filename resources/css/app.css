@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Add any global custom styles here if needed */
+}
+
+@layer components {
+  /* Add any custom components here if needed */
+}
+
+@layer utilities {
+  /* Add any custom utilities here if needed */
+}
