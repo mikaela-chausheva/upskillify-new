@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Upskillify</title>
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js']) <!-- Make sure this comes after the routes are injected -->
 </head>
 <body>
-    <!-- Ensure the root element exists and contains the data-page attribute -->
+    @inertia
+    @routes <!-- This will inject the routes from Ziggy into your JavaScript -->
     <div id="app" data-page="{{ json_encode($page) }}"></div>
 </body>
 </html>

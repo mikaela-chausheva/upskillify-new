@@ -1,6 +1,8 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-// import { route } from '@inertiajs/vue3';
+import { route } from 'ziggy-js';
+
+
 
 
 const form = useForm({
@@ -11,6 +13,14 @@ const form = useForm({
 const submit = () => {
     form.post(route('login.store'), {
         onFinish: () => form.reset('password'),
+        onSuccess: () => {
+            // After login is successful, redirect to the dashboard page
+            window.location.href = route('home');  // Replace 'dashboard' with your desired route
+        },
+        onError: (errors) => {
+            // Handle login errors if needed
+            console.error('Login failed:', errors);
+        },
     });
 };
 </script>
@@ -34,15 +44,6 @@ const submit = () => {
         </form>
     </div>
 </template>
-
-
-
- <!-- <style scoped>
-.login-form {
-  max-width: 400px;
-  margin: auto;
-}
-</style> -->
 
  <style scoped>
 .login-container {
