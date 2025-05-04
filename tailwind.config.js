@@ -1,7 +1,8 @@
 module.exports = {
     content: [
-      './resources/**/*.{blade.php,js,vue}',
-      './node_modules/flowbite/**/*.js'
+        './resources/views/**/*.blade.php',
+        './resources/js/**/*.vue',
+        // './resources/js/**/*.js',
     ],
     theme: {
       extend: {},

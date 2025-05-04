@@ -3,8 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 
 
-
-
 const form = useForm({
     email: '',
     password: '',
