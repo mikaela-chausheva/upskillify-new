@@ -1,4 +1,6 @@
  <script setup>
+ console.log('🔍 Register.vue mounted');
+
   import { useForm } from '@inertiajs/vue3'
 
   const form = useForm({
@@ -10,9 +12,10 @@
   })
 
   function submitForm() {
-    // console.log('Submitting form', form)
-    // form.post('/register')
-    form.post('/register', {
+
+    console.log('Submitting form')
+
+    form.post(route('register.store'), {
       onStart() {
         // Optionally you can add loading states or disable the submit button
         console.log('Submitting form...');
@@ -40,30 +43,35 @@
 <template>
     <div class="register-form">
         <h2>Register</h2>
-        <form @submit.prevent="submit" class="register-form">
+        <form @submit.prevent="submitForm" class="register-form">
 
             <div>
           <label for="first_name">First Name</label>
           <input v-model="form.first_name" type="text" id="first_name" required />
+          <p v-if="form.errors.first_name" class="error">{{ form.errors.first_name }}</p>
         </div>
 
         <div>
           <label for="last_name">Last Name</label>
           <input v-model="form.last_name" type="text" id="last_name" required />
+          <p v-if="form.errors.last_name" class="error">{{ form.errors.last_name }}</p>
         </div>
 
             <div>
           <label for="email">Email</label>
           <input v-model="form.email" type="email" id="email" required />
+          <p v-if="form.errors.email" class="error">{{ form.errors.email }}</p>
         </div>
 
         <div>
           <label for="password">Password</label>
-          <input v-model="form.password" type="password" id="password" required />
+          <input v-model="form.password"  name="password" type="password" id="password" required />
+          <p v-if="form.errors.password" class="error">{{ form.errors.password }}</p>
         </div>
         <div>
           <label or="password_confirmation">Confirm Password</label>
-          <input v-model="form.password_confirmation" type="password" id="password_confirmation" required />
+          <input v-model="form.password_confirmation" name="password_confirmation" type="password" id="password_confirmation"  required />
+          <p v-if="form.errors.password_confirmation" class="error">{{ form.errors.password_confirmation }}</p>
         </div>
 
         <button type="submit" :disabled="form.processing">Register</button>

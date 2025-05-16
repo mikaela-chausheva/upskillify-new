@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Inertia::share('csrf_token', fn () => csrf_token());
+
+        Inertia::share([
+            'auth' => [
+                'user' => fn () => Auth::check() ? Auth::user() : null,
+            ],
+        ]);
+
+        Inertia::share([
+            'flash' => fn () => [
+                'success' => Session::get('success'),
+                'error' => Session::get('error'),
+            ],
+        ]);
     }
 }

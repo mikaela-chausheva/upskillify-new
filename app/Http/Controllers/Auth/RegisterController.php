@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use App\Http\Controllers\Controller;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use App\Models\User;
-use App\Http\Controller\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -18,6 +20,9 @@ class RegisterController extends Controller
      */
     public function view()
     {
+        // ✅ Confirm the route/controller is hit
+        // dd('🧭 Reached RegisterController@view');
+
         return Inertia::render('Auth/Register');
     }
 
@@ -26,25 +31,36 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-        // dd($request);
+        Log::info('📩 RegisterController@store was called');
 
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'student'
-        ]);
-        // dd($user);
+        try {
+            $validated = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name'  => 'required|string|max:255',
+                'email'      => 'required|string|email|max:255|unique:users',
+                'password'   => 'required|string|min:8|confirmed',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('❌ Validation failed', $e->errors());
+            return back()->withErrors($e->errors())->withInput();
+        }
 
-        // Auth::login($user);
+        try {
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name'  => $request->last_name,
+                'email'      => $request->email,
+                'password'   => Hash::make($request->password),
+                'role'       => 'student',
+            ]);
+        } catch (\Exception $e) {
+            Log::error('❌ User creation failed', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'User creation failed'], 500);
+        }
 
-        return redirect('/register');
+
+        Auth::login($user);
+
+        return redirect('/login')->with('success', 'Registration successful. Please log in.');
     }
 }

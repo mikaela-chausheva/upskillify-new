@@ -5,9 +5,9 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Course;
+// use App\Models\User;
 use Illuminate\Support\Str;
-
-
+use Illuminate\Support\Facades\Auth;
 
 
 class CourseController extends Controller
@@ -25,23 +25,50 @@ class CourseController extends Controller
      */
     public function storeCourse(Request $request)
     {
+
+        $user = Auth::user(); // returns the authenticated user instance or null
+        // dd($user);
+        // dd($user);
+        if (!$user) {
+            abort(403, 'Unauthorized');
+        }
+
+        // ✅ Check if the user is a teacher
+    if ($user->role !== 'teacher') {
+        abort(403, 'Only teachers can create courses.');
+    }
         $request->validate([
            'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
-            // 'teacher_id' => 'required|exists:users,id',
+            'photo_url' => 'required|string|max:255'
         ]);
         // dd($request);
+
+        // $user = auth()->User();
 
         $course = Course::create([
             'title' => $request->title,
             'slug' =>Str::slug($request->title),
             'description' => $request->description,
+            'photo_url' => $request->photo_url,
             'price' => $request->price,
-            'teacher_id' => 1,
+            'teacher_id' => $user->id,
             'is_active' => true
         ]);
 
-        return redirect('/');
+
+        return redirect('/')->with('success', 'Course created successfully!');
+
     }
+
+    public function viewListCourses()
+    {
+        $courses = Course::all();
+
+        return Inertia::render('Courses/ListCourses',[
+            'courses' => $courses
+        ]);
+    }
+
 }
