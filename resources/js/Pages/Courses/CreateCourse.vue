@@ -1,43 +1,3 @@
-<script setup>
-  import Navbar from '@/Components/Navbar.vue';
-
-  import { useForm } from '@inertiajs/vue3';
-
-    const form = useForm({
-    title: '',
-    description: '',
-    photo_url: '',
-    price :0
-    });
-
-
-function submitForm() {
-    // console.log('Submitting form', form)
-    // form.post('/register')
-    form.post(route('course.store'), {
-      onStart() {
-        // Optionally you can add loading states or disable the submit button
-        console.log('Submitting form...');
-      },
-      onFinish() {
-        // Handle the state after the request is done
-        console.log('Form submission finished.');
-      },
-      onError(errors) {
-        // This is where you can handle form errors if validation fails
-        console.log('Form errors:', errors);
-      },
-      onSuccess() {
-        // After success, you can redirect to another page
-        console.log('Course created successful!');
-        // Redirect to login page after successful registration (optional)
-        // You could use: this.$inertia.visit('/login') for Inertia routing
-        window.location.href = "/createCourse"; // Redirect to login after registration
-      }
-    })
-  }
-</script>
-
 <template>
     <Navbar />
     <form @submit.prevent="submitForm">
@@ -128,3 +88,43 @@ function submitForm() {
       </div>
     </form>
   </template>
+
+<script setup>
+import Navbar from '@/Components/Navbar.vue';
+
+import { useForm } from '@inertiajs/vue3';
+
+  const form = useForm({
+  title: '',
+  description: '',
+  photo_url: '',
+  price :0
+  });
+
+
+function submitForm() {
+  // console.log('Submitting form', form)
+  // form.post('/register')
+  form.post(route('course.store'), {
+    onStart() {
+      // Optionally you can add loading states or disable the submit button
+      console.log('Submitting form...');
+    },
+    onFinish() {
+      // Handle the state after the request is done
+      console.log('Form submission finished.');
+    },
+    onError(errors) {
+      // This is where you can handle form errors if validation fails
+      console.log('Form errors:', errors);
+    },
+    onSuccess() {
+      // After success, you can redirect to another page
+      console.log('Course created successful!');
+      // Redirect to login page after successful registration (optional)
+      // You could use: this.$inertia.visit('/login') for Inertia routing
+      window.location.href = "/createCourse"; // Redirect to login after registration
+    }
+  })
+}
+</script>

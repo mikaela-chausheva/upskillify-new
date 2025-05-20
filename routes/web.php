@@ -5,11 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CourseController;
-use App\Models\Course;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use App\Http\Controllers\LessonController;
 
 // Dashboard
 Route::get('/', function () {
@@ -29,10 +25,19 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 // Courses
 Route::middleware(['auth'])->group(function () {
-Route::get('/createCourse', [CourseController::class, 'viewCreate']);
-Route::post('/storeCourse', [CourseController::class, 'storeCourse'])->name('course.store');
+    Route::get('/createCourse', [CourseController::class, 'viewCreate']);
+    Route::post('/storeCourse', [CourseController::class, 'storeCourse'])->name('course.store');
 });
+
 Route::get('/courses', [CourseController::class, 'viewListCourses'])->name('courses.list');
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard'); // Assuming you have a Dashboard.vue component
-// })->name('dashboard');
+Route::get('/courses/{course}', [CourseController::class, 'viewSingleCourse'])->name('courses.show');
+
+// Lessons
+Route::middleware(['auth'])->group(function () {
+    Route::get('/courses/{course}/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
+    Route::post('/courses/{course}/lessons', [LessonController::class, 'store'])->name('lessons.store');
+    Route::get('/courses/{course}/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
+});
+
+
+

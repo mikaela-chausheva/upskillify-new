@@ -1,45 +1,3 @@
- <script setup>
- console.log('🔍 Register.vue mounted');
-
-  import { useForm } from '@inertiajs/vue3'
-
-  const form = useForm({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-  })
-
-  function submitForm() {
-
-    console.log('Submitting form')
-
-    form.post(route('register.store'), {
-      onStart() {
-        // Optionally you can add loading states or disable the submit button
-        console.log('Submitting form...');
-      },
-      onFinish() {
-        // Handle the state after the request is done
-        console.log('Form submission finished.');
-      },
-      onError(errors) {
-        // This is where you can handle form errors if validation fails
-        console.log('Form errors:', errors);
-      },
-      onSuccess() {
-        // After success, you can redirect to another page
-        console.log('Registration successful!');
-        // Redirect to login page after successful registration (optional)
-        // You could use: this.$inertia.visit('/login') for Inertia routing
-        window.location.href = "/login"; // Redirect to login after registration
-      }
-    })
-  }
-  </script>
-
-
 <template>
     <div class="register-form">
         <h2>Register</h2>
@@ -79,6 +37,47 @@
         </form>
     </div>
 </template>
+
+<script setup>
+console.log('🔍 Register.vue mounted');
+
+ import { useForm } from '@inertiajs/vue3'
+
+ const form = useForm({
+   first_name: '',
+   last_name: '',
+   email: '',
+   password: '',
+   password_confirmation: '',
+ })
+
+ function submitForm() {
+
+   console.log('Submitting form')
+
+   form.post(route('register.store'), {
+     onStart() {
+       // Optionally you can add loading states or disable the submit button
+       console.log('Submitting form...');
+     },
+     onFinish() {
+       // Handle the state after the request is done
+       console.log('Form submission finished.');
+     },
+     onError(errors) {
+       // This is where you can handle form errors if validation fails
+       console.log('Form errors:', errors);
+     },
+     onSuccess() {
+       // After success, you can redirect to another page
+       console.log('Registration successful!');
+       // Redirect to login page after successful registration (optional)
+       // You could use: this.$inertia.visit('/login') for Inertia routing
+       window.location.href = "/login"; // Redirect to login after registration
+     }
+   })
+ }
+ </script>
 
  <style scoped>
 .register-container {

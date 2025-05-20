@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+// use App\Model\Lesson;
+
 
 class Course extends Model
 {
@@ -15,4 +17,10 @@ class Course extends Model
         'price',
         'is_active',
     ];
+
+    public function lessons()
+{
+    return $this->hasMany(\App\Models\Lesson::class);
+}
+
 }

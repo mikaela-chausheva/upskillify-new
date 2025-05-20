@@ -71,4 +71,16 @@ class CourseController extends Controller
         ]);
     }
 
+    public function viewSingleCourse(Course $course)
+{
+    // Optional: eager load lessons
+    $course->load('lessons');
+
+    return Inertia::render('Courses/ShowCourse', [
+        'course' => $course,
+        'authUser' => Auth::user(),
+    ]);
+}
+
+
 }
