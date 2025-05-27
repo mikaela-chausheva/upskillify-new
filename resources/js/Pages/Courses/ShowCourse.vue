@@ -6,6 +6,13 @@
       <h1 class="text-2xl font-bold mb-2">{{ course.title }}</h1>
       <p class="text-gray-700 mb-4">{{ course.description }}</p>
       <p class="text-lg font-semibold text-blue-600 mb-6">Price: ${{ course.price }}</p>
+      <button
+            @click="pay"
+            class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+             Pay Now
+        </button>
+
 
       <h2 class="text-xl font-bold mb-4">Lessons</h2>
 
@@ -52,9 +59,24 @@
   import Navbar from '@/Components/Navbar.vue';
   import { Link } from '@inertiajs/vue3';
   import { route } from 'ziggy-js';
+  import { loadStripe } from '@stripe/stripe-js'
+    import axios from 'axios'
 
   const props = defineProps({
     course: Object,
     authUser : Object,
   })
+
+  const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY)
+
+  const pay = async () => {
+  try {
+    const { data } = await axios.post(route('courses.checkout', props.course.id))
+    const stripe = await stripePromise
+    stripe.redirectToCheckout({ sessionId: data.id })
+  } catch (error) {
+    alert('Payment session could not be created.')
+    console.error(error)
+  }
+    }
   </script>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\PaymentController;
 
 // Dashboard
 Route::get('/', function () {
@@ -38,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/courses/{course}/lessons', [LessonController::class, 'store'])->name('lessons.store');
     Route::get('/courses/{course}/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
 });
+
+Route::post('/courses/{course}/checkout', [PaymentController::class, 'createCheckoutSession'])
+    ->middleware('auth')
+    ->name('courses.checkout');
 
 
 
