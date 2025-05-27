@@ -25,6 +25,14 @@
         </a>
       </div>
 
+      <Link
+        v-if="authUser?.id === course.teacher_id"
+        :href="route('lessons.edit', [course.id, lesson.id])"
+        class="text-sm text-blue-600 underline"
+        >
+        Edit Lesson
+    </Link>
+
       <Link :href="route('courses.show', course.id)" class="text-sm text-gray-600 hover:underline mt-6 block">
         ← Back to Course
       </Link>

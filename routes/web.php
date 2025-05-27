@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/courses/{course}/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
     Route::post('/courses/{course}/lessons', [LessonController::class, 'store'])->name('lessons.store');
     Route::get('/courses/{course}/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
+    Route::get('/courses/{course}/lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('lessons.edit');
+    Route::put('/courses/{course}/lessons/{lesson}', [LessonController::class, 'update'])->name('lessons.update');
 });
 
 Route::post('/courses/{course}/checkout', [PaymentController::class, 'createCheckoutSession'])
