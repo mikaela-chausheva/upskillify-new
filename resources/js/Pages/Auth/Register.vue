@@ -1,163 +1,107 @@
 <template>
-    <div class="register-form">
-        <h2>Register</h2>
-        <form @submit.prevent="submitForm" class="register-form">
+    <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div class="bg-white shadow-lg rounded-xl w-full max-w-md p-8">
+        <h2 class="text-2xl font-bold text-center text-blue-700 mb-6">Create an Account</h2>
 
-            <div>
-          <label for="first_name">First Name</label>
-          <input v-model="form.first_name" type="text" id="first_name" required />
-          <p v-if="form.errors.first_name" class="error">{{ form.errors.first_name }}</p>
-        </div>
+        <form @submit.prevent="submitForm" class="space-y-5">
+          <!-- First Name -->
+          <div>
+            <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+            <input
+              v-model="form.first_name"
+              type="text"
+              id="first_name"
+              class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <p v-if="form.errors.first_name" class="text-red-500 text-sm mt-1">{{ form.errors.first_name[0] }}</p>
+          </div>
 
-        <div>
-          <label for="last_name">Last Name</label>
-          <input v-model="form.last_name" type="text" id="last_name" required />
-          <p v-if="form.errors.last_name" class="error">{{ form.errors.last_name }}</p>
-        </div>
+          <!-- Last Name -->
+          <div>
+            <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+            <input
+              v-model="form.last_name"
+              type="text"
+              id="last_name"
+              class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <p v-if="form.errors.last_name" class="text-red-500 text-sm mt-1">{{ form.errors.last_name[0] }}</p>
+          </div>
 
-            <div>
-          <label for="email">Email</label>
-          <input v-model="form.email" type="email" id="email" required />
-          <p v-if="form.errors.email" class="error">{{ form.errors.email }}</p>
-        </div>
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              v-model="form.email"
+              type="email"
+              id="email"
+              class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <p v-if="form.errors.email" class="text-red-500 text-sm mt-1">{{ form.errors.email[0] }}</p>
+          </div>
 
-        <div>
-          <label for="password">Password</label>
-          <input v-model="form.password"  name="password" type="password" id="password" required />
-          <p v-if="form.errors.password" class="error">{{ form.errors.password }}</p>
-        </div>
-        <div>
-          <label or="password_confirmation">Confirm Password</label>
-          <input v-model="form.password_confirmation" name="password_confirmation" type="password" id="password_confirmation"  required />
-          <p v-if="form.errors.password_confirmation" class="error">{{ form.errors.password_confirmation }}</p>
-        </div>
+          <!-- Password -->
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              v-model="form.password"
+              type="password"
+              id="password"
+              class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <p v-if="form.errors.password" class="text-red-500 text-sm mt-1">{{ form.errors.password[0] }}</p>
+          </div>
 
-        <button type="submit" :disabled="form.processing">Register</button>
+          <!-- Confirm Password -->
+          <div>
+            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <input
+              v-model="form.password_confirmation"
+              type="password"
+              id="password_confirmation"
+              class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <p v-if="form.errors.password_confirmation" class="text-red-500 text-sm mt-1">
+              {{ form.errors.password_confirmation[0] }}
+            </p>
+          </div>
 
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            :disabled="form.processing"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-semibold transition"
+          >
+            Register
+          </button>
         </form>
-    </div>
-</template>
-
-<script setup>
-console.log('🔍 Register.vue mounted');
-
- import { useForm } from '@inertiajs/vue3'
-
- const form = useForm({
-   first_name: '',
-   last_name: '',
-   email: '',
-   password: '',
-   password_confirmation: '',
- })
-
- function submitForm() {
-
-   console.log('Submitting form')
-
-   form.post(route('register.store'), {
-     onStart() {
-       // Optionally you can add loading states or disable the submit button
-       console.log('Submitting form...');
-     },
-     onFinish() {
-       // Handle the state after the request is done
-       console.log('Form submission finished.');
-     },
-     onError(errors) {
-       // This is where you can handle form errors if validation fails
-       console.log('Form errors:', errors);
-     },
-     onSuccess() {
-       // After success, you can redirect to another page
-       console.log('Registration successful!');
-       // Redirect to login page after successful registration (optional)
-       // You could use: this.$inertia.visit('/login') for Inertia routing
-       window.location.href = "/login"; // Redirect to login after registration
-     }
-   })
- }
- </script>
-
- <style scoped>
-.register-container {
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-.register-form input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.register-form button {
-    margin-top: 15px;
-    padding: 10px;
-    width: 100%;
-    background-color: #1d4ed8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.register-form button:hover {
-    background-color: #2563eb;
-}
-
-.error {
-    color: red;
-    margin-top: 5px;
-    font-size: 0.9rem;
-}
-</style>
-
-<!--
-<template>
-    <div class="register-form">
-      <h1>Register</h1>
-      <form @submit.prevent="submitForm">
-        <div>
-          <label for="first_name">First Name</label>
-          <input v-model="form.first_name" type="text" id="first_name" required />
-        </div>
-
-        <div>
-          <label for="last_name">Last Name</label>
-          <input v-model="form.last_name" type="text" id="last_name" required />
-        </div>
-
-        <div>
-          <label for="email">Email</label>
-          <input v-model="form.email" type="email" id="email" required />
-        </div>
-
-        <div>
-          <label for="password">Password</label>
-          <input v-model="form.password" type="password" id="password" required />
-        </div>
-
-        <div>
-          <label for="password_confirmation">Confirm Password</label>
-          <input v-model="form.password_confirmation" type="password" id="password_confirmation" required />
-        </div>
-
-        <button type="submit" :disabled="form.processing">Register</button>
-      </form>
+        <p class="text-sm text-center text-gray-600 mt-4">
+            Already have an account?
+            <a href="/login" class="text-blue-600 hover:underline font-medium">Log in</a>
+        </p>
+      </div>
     </div>
   </template>
 
-  <style scoped>
-.register-form {
-  max-width: 400px;
-  margin: auto;
-}
-</style> -->
+  <script setup>
+  import { useForm } from '@inertiajs/vue3'
+
+  const form = useForm({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  })
+
+  function submitForm() {
+    form.post(route('register.store'), {
+      onError(errors) {
+        console.log('Validation Errors:', errors)
+      },
+      onSuccess() {
+        window.location.href = "/login"
+      },
+    })
+  }
+  </script>
