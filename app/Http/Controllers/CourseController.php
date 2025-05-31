@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 // use App\Models\User;
 use Illuminate\Support\Str;
+use App\Models\Enrollment;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -76,9 +77,23 @@ class CourseController extends Controller
     // Optional: eager load lessons
     $course->load('lessons');
 
+    if (request()->query('success') === 'true' && Auth::check()) {
+        Enrollment::firstOrCreate([
+            'user_id' => Auth::id(),
+            'course_id' => $course->id,
+        ]);
+
+        session()->flash('success', 'Thank you! You are now enrolled.');
+    }
+
+    $isEnrolled = Auth::check() && Enrollment::where('user_id', Auth::id())
+        ->where('course_id', $course->id)
+        ->exists();
+
     return Inertia::render('Courses/ShowCourse', [
         'course' => $course,
         'authUser' => Auth::user(),
+        'isEnrolled' => $isEnrolled,
     ]);
 }
 

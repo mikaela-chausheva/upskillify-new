@@ -19,8 +19,13 @@ class Course extends Model
     ];
 
     public function lessons()
-{
-    return $this->hasMany(\App\Models\Lesson::class);
-}
+    {
+        return $this->hasMany(\App\Models\Lesson::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'enrollments')->withTimestamps();
+    }
 
 }

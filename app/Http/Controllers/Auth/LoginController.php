@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -25,17 +27,28 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            // dd(Auth->id);
-            // dd(Auth::user());
-            return redirect()->intended('/');
-        }
 
+    $user = User::where('email', $credentials['email'])->first();
+
+    if (!$user) {
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+            'email' => 'No account found with this email.',
+        ])->onlyInput('email');
     }
+
+    if (!Hash::check($credentials['password'], $user->password)) {
+        return back()->withErrors([
+            'password' => 'Incorrect password.',
+        ])->onlyInput('email');
+    }
+
+    // If both checks passed, log the user in
+    Auth::login($user);
+    $request->session()->regenerate();
+
+    return redirect()->intended('/');
+    }
+
 
     /**
      * Log the user out.

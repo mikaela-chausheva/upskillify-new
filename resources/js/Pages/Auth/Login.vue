@@ -8,25 +8,31 @@
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
             <input
-              v-model="form.email"
-              type="email"
-              id="email"
-              class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                v-model="form.email"
+                type="email"
+                id="email"
+                autocomplete="email"
+                class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
             />
-            <p v-if="form.errors.email" class="text-red-500 text-sm mt-1">{{ form.errors.email[0] }}</p>
-          </div>
+            <p v-if="form.errors.email" class="text-red-600 text-sm mt-1">{{ form.errors.email }}</p>
+        </div>
 
           <!-- Password -->
           <div>
             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
             <input
-              v-model="form.password"
-              type="password"
-              id="password"
-              class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                v-model="form.password"
+                type="password"
+                id="password"
+                autocomplete="current-password"
+                required
+                class="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <p v-if="form.errors.password" class="text-red-500 text-sm mt-1">{{ form.errors.password[0] }}</p>
-          </div>
+            <p v-if="form.errors.password" class="text-red-600 text-sm mt-1">{{ form.errors.password }}</p>
+
+
+            </div>
 
           <!-- Login Button -->
           <button
@@ -37,6 +43,11 @@
             Login
           </button>
         </form>
+        <div v-if="form.errors.email" class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
+            {{ form.errors.email }}
+        </div>
+
+
         <p class="text-sm text-center text-gray-600 mt-4">
             Don't have an account?
             <a href="/register" class="text-blue-600 hover:underline font-medium">Register</a>
@@ -44,6 +55,15 @@
       </div>
     </div>
   </template>
+
+<style scoped>
+.error {
+  color: red;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+</style>
+
 
   <script setup>
   import { useForm } from '@inertiajs/vue3'
@@ -57,11 +77,11 @@
   const submit = () => {
     form.post(route('login.store'), {
       onFinish: () => form.reset('password'),
+      onError: (errors) => {
+      console.log("Login errors", form.errors)
+    },
       onSuccess: () => {
         window.location.href = route('home')
-      },
-      onError: (errors) => {
-        console.warn('Login failed', errors)
       },
     })
   }

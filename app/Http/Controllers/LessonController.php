@@ -7,6 +7,8 @@ use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Enrollment;
+
 
 
 class LessonController extends Controller
@@ -49,30 +51,31 @@ class LessonController extends Controller
 
     public function show(Course $course, Lesson $lesson)
 {
-    // Optional: you can check if the lesson belongs to the course
+    // check if the lesson belongs to the course
     if ($lesson->course_id !== $course->id) {
         abort(404, 'Lesson not found in this course.');
     }
 
     $user =  Auth::user();
 
+
      // Guest users
      if (!$user) {
         abort(403, 'You must be logged in to view this lesson.');
     }
 
-    // Simulated "paid" access: must come from Stripe success redirect
-    if (request()->query('success') !== 'true') {
-        abort(403, 'You must purchase this course to view lessons.');
+    // Check if the user is a techer or is enrolled by student
+    if ($user->id !== $course->teacher_id) {
+        $enrolled = Enrollment::where('user_id', $user->id)
+                              ->where('course_id', $course->id)
+                              ->exists();
+
+        if (!$enrolled) {
+            abort(403, 'You must purchase this course to view lessons.');
+        }
     }
 
-    // Teacher can always view their own lessons
-    if ($user->id === $course->teacher_id) {
-        return Inertia::render('Lessons/ShowLesson', [
-            'course' => $course,
-            'lesson' => $lesson,
-        ]);
-    }
+
 
     return Inertia::render('Lessons/ShowLesson', [
         'course' => $course,

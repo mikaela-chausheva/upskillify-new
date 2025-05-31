@@ -31,7 +31,10 @@ class PaymentController extends Controller
             'cancel_url' => url("/courses/{$course->id}?canceled=true"),
         ]);
 
+
+        // Redirect after successful payment
         return response()->json(['id' => $session->id]);
+
 
 
     }

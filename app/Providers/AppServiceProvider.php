@@ -28,13 +28,11 @@ class AppServiceProvider extends ServiceProvider
             'auth' => [
                 'user' => fn () => Auth::check() ? Auth::user() : null,
             ],
-        ]);
-
-        Inertia::share([
             'flash' => fn () => [
                 'success' => Session::get('success'),
                 'error' => Session::get('error'),
             ],
+            'errors' => fn () => Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [],
         ]);
     }
 }
