@@ -28,6 +28,8 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/createCourse', [CourseController::class, 'viewCreate']);
     Route::post('/storeCourse', [CourseController::class, 'storeCourse'])->name('course.store');
+    Route::get('/my-courses', [CourseController::class, 'myCourses'])->name('courses.mine');
+
 });
 
 Route::get('/courses', [CourseController::class, 'viewListCourses'])->name('courses.list');

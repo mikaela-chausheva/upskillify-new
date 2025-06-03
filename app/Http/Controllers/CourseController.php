@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Course;
-// use App\Models\User;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Enrollment;
 use Illuminate\Support\Facades\Auth;
@@ -73,29 +73,43 @@ class CourseController extends Controller
     }
 
     public function viewSingleCourse(Course $course)
-{
-    // Optional: eager load lessons
-    $course->load('lessons');
+    {
+        // Optional: eager load lessons
+        $course->load('lessons');
 
-    if (request()->query('success') === 'true' && Auth::check()) {
-        Enrollment::firstOrCreate([
-            'user_id' => Auth::id(),
-            'course_id' => $course->id,
+        if (request()->query('success') === 'true' && Auth::check()) {
+            Enrollment::firstOrCreate([
+                'user_id' => Auth::id(),
+                'course_id' => $course->id,
+            ]);
+
+            session()->flash('success', 'Thank you! You are now enrolled.');
+        }
+
+        $isEnrolled = Auth::check() && Enrollment::where('user_id', Auth::id())
+            ->where('course_id', $course->id)
+            ->exists();
+
+        return Inertia::render('Courses/ShowCourse', [
+            'course' => $course,
+            'authUser' => Auth::user(),
+            'isEnrolled' => $isEnrolled,
         ]);
-
-        session()->flash('success', 'Thank you! You are now enrolled.');
     }
 
-    $isEnrolled = Auth::check() && Enrollment::where('user_id', Auth::id())
-        ->where('course_id', $course->id)
-        ->exists();
 
-    return Inertia::render('Courses/ShowCourse', [
-        'course' => $course,
-        'authUser' => Auth::user(),
-        'isEnrolled' => $isEnrolled,
-    ]);
-}
 
+    public function myCourses()
+    {
+        $user = Auth::user();
+
+        $createdCourses = $user->createdCourses()->withCount('lessons')->get();
+        $enrolledCourses = $user->enrolledCourses()->withCount('lessons')->get();
+
+        return Inertia::render('Courses/MyCourses', [
+            'createdCourses' => $createdCourses,
+            'enrolledCourses' => $enrolledCourses,
+        ]);
+    }
 
 }
