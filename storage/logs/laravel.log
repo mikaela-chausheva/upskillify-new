@@ -3349,3 +3349,4 @@
 #64 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('/Users/mikaelac...')
 #65 {main}
 "} 
+[2025-06-03 10:17:24] local.INFO: 📩 RegisterController@store was called  
