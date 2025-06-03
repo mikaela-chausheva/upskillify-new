@@ -34,7 +34,7 @@ class CourseController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        // ✅ Check if the user is a teacher
+        // Check if the user is a teacher
     if ($user->role !== 'teacher') {
         abort(403, 'Only teachers can create courses.');
     }
@@ -74,21 +74,21 @@ class CourseController extends Controller
 
     public function viewSingleCourse(Course $course)
     {
-        // Optional: eager load lessons
         $course->load('lessons');
 
-        if (request()->query('success') === 'true' && Auth::check()) {
-            Enrollment::firstOrCreate([
+        $isEnrolled = Auth::check() && Enrollment::where('user_id', Auth::id())
+            ->where('course_id', $course->id)
+            ->exists();
+
+        if (request()->query('success') === 'true' && Auth::check() && !$isEnrolled) {
+            Enrollment::create([
                 'user_id' => Auth::id(),
                 'course_id' => $course->id,
             ]);
 
             session()->flash('success', 'Thank you! You are now enrolled.');
+            $isEnrolled = true; // update state after inserting
         }
-
-        $isEnrolled = Auth::check() && Enrollment::where('user_id', Auth::id())
-            ->where('course_id', $course->id)
-            ->exists();
 
         return Inertia::render('Courses/ShowCourse', [
             'course' => $course,

@@ -7,11 +7,18 @@
       <p class="text-gray-700 mb-4">{{ course.description }}</p>
       <p class="text-lg font-semibold text-blue-600 mb-6">Price: ${{ course.price }}</p>
       <button
-            @click="pay"
-            class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-            >
-             Pay Now
-    </button>
+        @click="pay"
+        class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        :disabled="props.authUser?.id === props.course.teacher_id || props.isEnrolled"
+        >
+        {{
+            props.authUser?.id === props.course.teacher_id
+            ? 'You are the teacher'
+            : props.isEnrolled
+            ? 'Already Enrolled'
+            : 'Pay Now'
+        }}
+        </button>
 
 
       <h2 class="text-xl font-bold mb-4">Lessons</h2>
@@ -33,10 +40,17 @@
             🔒 You must purchase this course to access the lessons.
         </p>
         <button
-            @click="pay"
-            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        @click="pay"
+        class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        :disabled="props.authUser?.id === props.course.teacher_id || props.isEnrolled"
         >
-            Pay Now to Unlock
+        {{
+            props.authUser?.id === props.course.teacher_id
+            ? 'You are the teacher'
+            : props.isEnrolled
+            ? 'Already Enrolled'
+            : 'Pay Now To Unlock'
+        }}
         </button>
     </div>
 
@@ -64,6 +78,7 @@
   const props = defineProps({
     course: Object,
     authUser : Object,
+    isEnrolled: Boolean,
   })
 
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY)
@@ -99,7 +114,7 @@ const success = queryParams.get('success') === 'true'
 const canAccessLessons = computed(() => {
   if (!props.authUser) return false
   if (props.authUser.id === props.course.teacher_id) return true
-  return success
+  return props.isEnrolled
 })
 
   </script>
