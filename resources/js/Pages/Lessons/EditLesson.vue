@@ -51,9 +51,8 @@
   }
 
   const submit = () => {
-    form.post(route('lessons.update', [props.course.id, props.lesson.id]), {
-      method: 'put',
-      forceFormData: true,
+    form.submit('put', route('lessons.update', [props.course.id, props.lesson.id]), {
+  forceFormData: true,
     })
   }
   </script>

@@ -12,6 +12,12 @@
           :key="course.id"
           class="bg-white shadow-md p-4 rounded-lg mb-4"
         >
+        <img
+            v-if="course.photo_url"
+            :src="course.photo_url"
+            alt="Course Cover"
+            class="w-full h-48 object-cover rounded-md mb-4"
+        />
           <h2 class="text-xl font-semibold">{{ course.title }}</h2>
           <p class="text-sm text-gray-600">{{ course.description }}</p>
           <Link
@@ -33,6 +39,13 @@
         :key="course.id"
         class="bg-white shadow-md p-4 rounded-lg mb-4"
       >
+
+      <img
+        v-if="course.photo_url"
+        :src="course.photo_url"
+        alt="Course Cover"
+        class="w-full h-48 object-cover rounded-md mb-4"
+    />
         <h2 class="text-xl font-semibold">{{ course.title }}</h2>
         <p class="text-sm text-gray-600">{{ course.description }}</p>
         <Link

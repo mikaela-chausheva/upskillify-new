@@ -58,9 +58,8 @@ class LessonController extends Controller
 
     $user =  Auth::user();
 
-
      // Guest users
-     if (!$user) {
+    if (!$user) {
         abort(403, 'You must be logged in to view this lesson.');
     }
 
@@ -75,11 +74,11 @@ class LessonController extends Controller
         }
     }
 
-
-
+    // Return view
     return Inertia::render('Lessons/ShowLesson', [
         'course' => $course,
         'lesson' => $lesson,
+        'authUser' => Auth::user()
     ]);
 }
 

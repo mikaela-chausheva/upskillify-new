@@ -13,7 +13,7 @@
           </div>
           <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div class="flex shrink-0 items-center">
-              <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+              <a href="/"><img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Upskillify" /> </a>
             </div>
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
@@ -77,6 +77,7 @@
   </template>
 
 <script setup>
+import { computed } from 'vue'
 import {
   Disclosure,
   DisclosureButton,
@@ -89,15 +90,36 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { router, usePage } from '@inertiajs/vue3'
 
-const navigation = [
-  { name: 'Courses', href: '/courses', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+const navigation = computed(() => {
+  if (!user) {
+    return [
+      { name: 'Courses', href: route('courses.list'), current: isCurrent('courses.list') },
+    ]
+  }
+
+  if (user.role === 'teacher') {
+    return [
+      { name: 'Courses', href: route('courses.list'), current: isCurrent('courses.list') },
+      { name: 'My Courses', href: route().has('courses.mine') ? route('courses.mine') : '#', current: isCurrent('courses.mine') },
+      { name: 'Create Course',
+        href: user && route().has('course.viewCreate') ? route('course.viewCreate') : '#',
+        current: isCurrent('course.viewCreate')  },
+    ]
+  }
+
+  // Students
+  return [
+    { name: 'Courses', href: route('courses.list'), current: isCurrent('courses.list') },
+    { name: 'My Courses', href: route().has('courses.mine') ? route('courses.mine') : '#', current: isCurrent('courses.mine') },
+  ]
+})
 
 const page = usePage()
 const user = page.props.auth?.user
+
+function isCurrent(name) {
+  return route().current(name)
+}
 
 function logout() {
   router.post(route('logout'), {}, {

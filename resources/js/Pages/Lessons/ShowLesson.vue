@@ -47,7 +47,8 @@ import { computed } from 'vue'
 
   const props = defineProps({
     course: Object,
-    lesson: Object
+    lesson: Object,
+    authUser:Object
   });
 
     const embedUrl = computed(() => {

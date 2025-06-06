@@ -109,6 +109,9 @@ class CourseController extends Controller
         return Inertia::render('Courses/MyCourses', [
             'createdCourses' => $createdCourses,
             'enrolledCourses' => $enrolledCourses,
+            'auth' => [
+            'user' => $user,
+            ],
         ]);
     }
 

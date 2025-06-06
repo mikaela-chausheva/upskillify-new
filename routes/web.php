@@ -7,10 +7,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Auth;
 
 // Dashboard
 Route::get('/', function () {
-    return Inertia::render('Home'); // This will render the Home.vue component
+    return Inertia::render('Home', [
+       'authUser' => Auth::user(),
+    ]);
 })->name('home'); // Give it a name 'home'
 
 //Register
@@ -26,7 +29,7 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 // Courses
 Route::middleware(['auth'])->group(function () {
-    Route::get('/createCourse', [CourseController::class, 'viewCreate']);
+    Route::get('/createCourse', [CourseController::class, 'viewCreate'])->name('course.viewCreate');
     Route::post('/storeCourse', [CourseController::class, 'storeCourse'])->name('course.store');
     Route::get('/my-courses', [CourseController::class, 'myCourses'])->name('courses.mine');
 
