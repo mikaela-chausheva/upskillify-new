@@ -4362,3 +4362,98 @@
 #77 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/phpunit/phpunit/phpunit(104): PHPUnit\\TextUI\\Application->run(Array)
 #78 {main}
 "} 
+[2025-06-11 21:21:38] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:21:38] testing.ERROR: ❌ Validation failed {"first_name":["The first name field is required."],"last_name":["The last name field is required."]} 
+[2025-06-11 21:25:42] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:26:02] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:27:49] local.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:27:49] local.ERROR: ❌ Validation failed {"first_name":["The first name field is required."],"last_name":["The last name field is required."],"email":["The email has already been taken."],"password":["The password field confirmation does not match."]} 
+[2025-06-11 21:28:00] local.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:28:00] local.ERROR: ❌ Validation failed {"email":["The email has already been taken."]} 
+[2025-06-11 21:28:04] local.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:29:46] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:30:44] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:32:09] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:33:34] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:35:51] testing.INFO: 📩 RegisterController@store was called  
+[2025-06-11 21:41:57] local.ERROR: include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory at /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php:582)
+[stacktrace]
+#0 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#1 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#2 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): include('/Users/mikaelac...')
+#3 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(433): Composer\\Autoload\\{closure}('/Users/mikaelac...')
+#4 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Composer\\Autoload\\ClassLoader->loadClass('Laravel\\\\Sanctum...')
+#5 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Sanctum...')
+#6 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Sanctum...')
+#7 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#8 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#9 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#10 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#11 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#12 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#13 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#14 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#15 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('/Users/mikaelac...')
+#16 {main}
+"} 
+[2025-06-11 21:41:58] local.ERROR: include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory at /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php:582)
+[stacktrace]
+#0 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#1 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#2 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): include('/Users/mikaelac...')
+#3 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(433): Composer\\Autoload\\{closure}('/Users/mikaelac...')
+#4 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Composer\\Autoload\\ClassLoader->loadClass('Laravel\\\\Sanctum...')
+#5 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Sanctum...')
+#6 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Sanctum...')
+#7 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#8 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#9 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#10 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#11 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#12 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#13 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#14 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#15 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('/Users/mikaelac...')
+#16 {main}
+"} 
+[2025-06-11 21:41:58] local.ERROR: include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory at /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php:582)
+[stacktrace]
+#0 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#1 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#2 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): include('/Users/mikaelac...')
+#3 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(433): Composer\\Autoload\\{closure}('/Users/mikaelac...')
+#4 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Composer\\Autoload\\ClassLoader->loadClass('Laravel\\\\Sanctum...')
+#5 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Sanctum...')
+#6 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Sanctum...')
+#7 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#8 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#9 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#10 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#11 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#12 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#13 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#14 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#15 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('/Users/mikaelac...')
+#16 {main}
+"} 
+[2025-06-11 21:41:58] local.ERROR: include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(/Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/sanctum/src/SanctumServiceProvider.php): Failed to open stream: No such file or directory at /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php:582)
+[stacktrace]
+#0 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#1 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'include(/Users/...', '/Users/mikaelac...', 582)
+#2 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(582): include('/Users/mikaelac...')
+#3 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/composer/ClassLoader.php(433): Composer\\Autoload\\{closure}('/Users/mikaelac...')
+#4 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Composer\\Autoload\\ClassLoader->loadClass('Laravel\\\\Sanctum...')
+#5 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Sanctum...')
+#6 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Sanctum...')
+#7 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#8 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#9 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#10 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#11 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#12 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#13 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#14 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#15 /Users/mikaelachausheva/Documents/MasterDegree/upskillify/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('/Users/mikaelac...')
+#16 {main}
+"} 
+[2025-06-11 21:48:15] testing.INFO: 📩 RegisterController@store was called  
