@@ -20,7 +20,7 @@ class CourseTest extends TestCase
     // }
 
 
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     public function test_teacher_can_create_course()
     {
