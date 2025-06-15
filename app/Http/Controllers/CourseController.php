@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class CourseController extends Controller
 {
     /**
-     * Show the registration form.
+     * Show the create course form.
      */
     public function viewCreate()
     {
@@ -22,7 +22,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Handle the registration request.
+     * Handle the creation course request.
      */
     public function storeCourse(Request $request)
     {
@@ -63,6 +63,18 @@ class CourseController extends Controller
 
     }
 
+    // Edit course
+
+
+
+
+
+
+
+
+
+
+    // View all courses in DB
     public function viewListCourses()
     {
         $courses = Course::all();
@@ -71,6 +83,7 @@ class CourseController extends Controller
             'courses' => $courses
         ]);
     }
+
 
     public function viewSingleCourse(Course $course)
     {

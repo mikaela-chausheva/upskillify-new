@@ -20,10 +20,12 @@
         </div>
       </div>
     </div>
+    <Footer/>
   </template>
 
   <script setup>
   import Navbar from '@/Components/Navbar.vue';
+  import Footer from '@/Components/Footer.vue'
   import { usePage } from '@inertiajs/vue3';
   import { route } from 'ziggy-js';
   const { courses } = usePage().props;

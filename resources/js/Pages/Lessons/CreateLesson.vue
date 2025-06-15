@@ -29,10 +29,12 @@
         </button>
       </form>
     </div>
+    <Footer/>
   </template>
 
   <script setup>
   import { useForm } from '@inertiajs/vue3'
+  import Footer from '@/Components/Footer.vue'
 
   const props = defineProps({ course: Object })
 

@@ -58,11 +58,13 @@
     </div>
     <p v-else>You are not enrolled in any courses yet.</p>
   </div>
+  <Footer/>
 </template>
 
 
   <script setup>
     import Navbar from '@/Components/Navbar.vue';
+    import Footer from '@/Components/Footer.vue'
     import {route} from 'ziggy-js';
     import { Link, usePage } from '@inertiajs/vue3'
 

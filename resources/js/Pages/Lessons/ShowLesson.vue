@@ -37,10 +37,12 @@
         ← Back to Course
       </Link>
     </div>
+    <Footer/>
   </template>
 
   <script setup>
   import { Link } from '@inertiajs/vue3';
+  import Footer from '@/Components/Footer.vue'
   import Navbar from '@/Components/Navbar.vue';
 import { computed } from 'vue'
   import { route } from 'ziggy-js';

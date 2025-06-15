@@ -100,13 +100,15 @@ public function update(Request $request, Course $course, Lesson $lesson)
     if (Auth::id() !== $course->teacher_id || $lesson->course_id !== $course->id) {
         abort(403);
     }
-
+    // dd($lesson);
     $validated = $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'nullable|string',
         'video_url' => 'nullable|url',
         'pdf_file' => 'nullable|file|mimes:pdf|max:2048',
     ]);
+
+    dd($validated);
 
     if ($request->hasFile('pdf_file')) {
         $validated['pdf_file'] = $request->file('pdf_file')->store('pdfs', 'public');

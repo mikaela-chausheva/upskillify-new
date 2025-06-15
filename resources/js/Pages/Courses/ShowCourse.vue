@@ -64,11 +64,12 @@
 
 
     </div>
-
+    <Footer/>
   </template>
 
   <script setup>
   import Navbar from '@/Components/Navbar.vue';
+  import Footer from '@/Components/Footer.vue'
   import { Link } from '@inertiajs/vue3';
   import { route } from 'ziggy-js';
   import { loadStripe } from '@stripe/stripe-js'

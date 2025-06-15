@@ -125,11 +125,11 @@ function logout() {
   router.post(route('logout'), {}, {
     preserveScroll: true,
     onSuccess: () => {
-      console.log("✅ Logged out successfully")
+      console.log("Logged out successfully")
       window.location.reload();
     },
     onError: (errors) => {
-      console.error("❌ Logout error:", errors)
+      console.error("Logout error:", errors)
     }
   })
 }
