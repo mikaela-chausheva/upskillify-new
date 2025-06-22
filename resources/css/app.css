@@ -13,3 +13,8 @@
 @layer utilities {
   /* Add any custom utilities here if needed */
 }
+@layer base {
+    html, body, #app {
+        @apply m-0 p-0 min-h-screen;
+    }
+  }

@@ -1,4 +1,5 @@
 <template>
+    <div class="min-h-screen flex flex-col">
      <Navbar />
      <div class="p-6">
     <h1 class="text-2xl font-bold mb-4">My Courses</h1>
@@ -58,7 +59,8 @@
     </div>
     <p v-else>You are not enrolled in any courses yet.</p>
   </div>
-  <Footer/>
+  <Footer  class="mt-auto" />
+</div>
 </template>
 
 

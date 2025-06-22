@@ -19,11 +19,11 @@
             class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32"
           >
             <!-- Background image -->
-            <img
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d..."
+            <!-- <img
+              src=""
               alt=""
               class="absolute inset-0 -z-10 size-full object-cover object-right md:object-center"
-            />
+            /> -->
 
             <!-- Gradient -->
             <div

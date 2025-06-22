@@ -1,4 +1,5 @@
 <template>
+    <div class="min-h-screen flex flex-col">
     <Navbar />
 
     <div class="max-w-3xl mx-auto p-6">
@@ -88,7 +89,8 @@
         </div>
         </form>
     </div>
-    <Footer/>
+    <Footer class="mt-auto" />
+</div>
   </template>
 
 <script setup>

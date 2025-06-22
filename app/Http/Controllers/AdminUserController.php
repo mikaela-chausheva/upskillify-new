@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Course;
 use Inertia\Inertia;
 
 class AdminUserController extends Controller
 {
+
+    public function dashboard()
+    {
+        $userStats = User::selectRaw('role, COUNT(*) as count')
+            ->groupBy('role')
+            ->pluck('count', 'role');
+
+        $coursesCount = Course::count();
+
+        return Inertia::render('Admin/Dashboard', [
+            'userStats' => $userStats,
+            'coursesCount' => $coursesCount,
+        ]);
+    }
 
     public function index()
     {

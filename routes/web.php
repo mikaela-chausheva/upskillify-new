@@ -51,12 +51,10 @@ Route::middleware(['auth'])->group(function () {
 });
 // Admin
 Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [AdminUserController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
-    Route::patch('/users/{user}/role', [AdminUserController::class, 'updateRole'])->name('users.updateRole');
+    Route::patch('/users/{user}/role', [AdminUserController::class, 'updateRole'])->name('admin.users.updateRole');
 });
 // Payment
 Route::post('/courses/{course}/checkout', [PaymentController::class, 'createCheckoutSession'])

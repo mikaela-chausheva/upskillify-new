@@ -106,6 +106,19 @@ const navigation = computed(() => {
         current: isCurrent('course.viewCreate')  },
     ]
   }
+  // Admin
+  if (user.role === 'admin') {
+    return [
+      { name: 'Courses', href: route('courses.list'), current: isCurrent('courses.list') },
+      { name: 'My Courses', href: route().has('courses.mine') ? route('courses.mine') : '#', current: isCurrent('courses.mine') },
+      { name: 'Create Course',
+        href: user && route().has('course.viewCreate') ? route('course.viewCreate') : '#',
+        current: isCurrent('course.viewCreate')  },
+        { name: 'Admin Dashboard', href:route().has('admin.dashboard') ? route('admin.dashboard') : '#', current: isCurrent('admin.dashboard') },
+        { name: 'Users - Roles', href:route().has('admin.users.index') ? route('admin.users.index') : '#', current: isCurrent('admin.users.index') }
+    ]
+
+  }
 
   // Students
   return [
