@@ -9,8 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-
-
+use Laravel\Socialite\Facades\Socialite;
 
 
 class RegisterController extends Controller
@@ -63,4 +62,34 @@ class RegisterController extends Controller
 
         return redirect('/login')->with('success', 'Registration successful. Please log in.');
     }
+
+    public function redirectToGoogle()
+{
+    return Socialite::driver('google')->redirect();
+}
+
+public function handleGoogleCallback()
+{
+    $googleUser = Socialite::driver('google')->stateless()->user();
+
+    // Разделяме пълното име на две части: първо и фамилно
+    $fullName = $googleUser->getName();
+    $nameParts = explode(' ', $fullName, 2); // ['first_name', 'last_name']
+
+    $user = User::firstOrCreate(
+        ['email' => $googleUser->getEmail()],
+        [
+            'first_name' => $nameParts[0] ?? '',
+            'last_name' => $nameParts[1] ?? '',
+            'google_id' => $googleUser->getId(),
+            'password' => bcrypt(str()->random(24)), // безопасна временна парола
+        ]
+    );
+
+    Auth::login($user);
+
+    return redirect()->route('courses.list');
+}
+
+
 }

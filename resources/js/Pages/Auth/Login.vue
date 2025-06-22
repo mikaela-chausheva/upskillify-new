@@ -46,6 +46,13 @@
         <div v-if="form.errors.email" class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
             {{ form.errors.email }}
         </div>
+        <a
+        href="/auth/google/redirect"
+        class="mt-4 flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+        >
+        <svg class="mr-2 h-5 w-5" viewBox="0 0 48 48"><path fill="#fff" d="..."/></svg>
+        Login with Google
+        </a>
 
 
         <p class="text-sm text-center text-gray-600 mt-4">

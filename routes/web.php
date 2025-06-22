@@ -26,6 +26,10 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 // Login
 Route::get('/login', [LoginController::class, 'view'])->name('login.view');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+// Login with google
+Route::get('/auth/google/redirect', [LoginController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
 
 // Logout
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

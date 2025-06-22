@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             <tr v-for="user in users" :key="user.id" class="border-t hover:bg-gray-50">
-                <td class="p-2">{{ user.name }}</td>
+                <td class="p-2">{{ user.first_name }} {{ user.last_name }}</td>
                 <td class="p-2">{{ user.email }}</td>
                 <td class="p-2 capitalize">{{ user.role }}</td>
                 <td class="p-2">
