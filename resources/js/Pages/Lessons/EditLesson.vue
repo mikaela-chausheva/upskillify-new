@@ -1,4 +1,6 @@
 <template>
+    <div class="min-h-screen flex flex-col">
+    <Navbar />
     <div class="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-xl shadow-md">
       <h2 class="text-xl font-bold mb-4">Edit Lesson</h2>
 
@@ -29,12 +31,15 @@
         </button>
       </form>
     </div>
-    <Footer/>
+    <Footer class="mt-auto" />
+</div>
   </template>
 
-  <script setup>
+
+<script setup>
   import { useForm } from '@inertiajs/vue3'
   import Footer from '@/Components/Footer.vue'
+  import Navbar from '@/Components/Navbar.vue'
 
   const props = defineProps({
     course: Object,

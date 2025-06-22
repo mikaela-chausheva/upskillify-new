@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <div class="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-xl shadow-md">
       <h2 class="text-xl font-bold mb-4">Create Lesson for {{ course.title }}</h2>
 
@@ -34,6 +35,7 @@
 
   <script setup>
   import { useForm } from '@inertiajs/vue3'
+    import Navbar from '@/Components/Navbar.vue'
   import Footer from '@/Components/Footer.vue'
 
   const props = defineProps({ course: Object })

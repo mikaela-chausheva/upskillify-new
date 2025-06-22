@@ -108,10 +108,15 @@ public function update(Request $request, Course $course, Lesson $lesson)
         'pdf_file' => 'nullable|file|mimes:pdf|max:2048',
     ]);
 
-    dd($validated);
+    if ($request->fails()) {
+        dd($request->all());
+    }
 
     if ($request->hasFile('pdf_file')) {
         $validated['pdf_file'] = $request->file('pdf_file')->store('pdfs', 'public');
+    } else {
+        unset($validated['pdf_file']);
+
     }
 
     $lesson->update($validated);
