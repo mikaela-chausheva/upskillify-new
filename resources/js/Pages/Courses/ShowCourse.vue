@@ -4,6 +4,15 @@
       <img :src="course.photo_url" alt="Course Image" class="rounded-lg w-full h-64 object-cover mb-6" />
 
       <h1 class="text-2xl font-bold mb-2">{{ course.title }}</h1>
+
+      <div v-if="averageRating !== null" class="flex items-center text-yellow-500 mb-2">
+        <template v-for="i in 5" :key="i">
+            <span v-if="i <= Math.floor(averageRating)">★</span>
+            <span v-else>☆</span>
+        </template>
+        <span class="ml-2 text-gray-700 text-sm">({{ averageRating }}/5)</span>
+        </div>
+
       <p class="text-gray-700 mb-4">{{ course.description }}</p>
       <p class="text-lg font-semibold text-blue-600 mb-6">Price: ${{ course.price }}</p>
       <button
@@ -62,6 +71,53 @@
         + Add Lesson
     </Link>
 
+    <!-- Rating -->
+    <div v-if="isEnrolled" class="mt-10 bg-gray-50 p-6 rounded-xl shadow-inner">
+        <h2 class="text-xl font-bold mb-4 text-gray-800">Leave a Rating</h2>
+
+        <form @submit.prevent="submitRating" class="space-y-6">
+            <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
+            <select v-model.number="newRating.rating"
+                    class="w-24 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                <option disabled value="">Select</option>
+                <option v-for="n in 5" :key="n" :value="n">{{ n }} ★</option>
+            </select>
+            </div>
+
+            <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Comment</label>
+            <textarea v-model="newRating.comment"
+                        placeholder="Write something..."
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3"
+                        rows="4"></textarea>
+            </div>
+
+            <div>
+            <button type="submit"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 shadow transition">
+                Submit Rating
+            </button>
+            </div>
+        </form>
+        </div>
+
+
+    <div v-if="course.ratings && course.ratings.length" class="mt-10 border-t pt-6">
+        <h2 class="text-xl font-semibold mb-4">Student Reviews</h2>
+        <div
+            v-for="rating in course.ratings"
+            :key="rating.id"
+            class="mb-4 p-4 bg-gray-100 rounded"
+        >
+            <p class="text-sm text-gray-700 mb-1">
+            <strong>{{ rating.user.first_name || rating.user.name }}</strong> rated
+            <span class="text-yellow-500 font-bold">{{ rating.rating }}/5</span>
+            </p>
+            <p class="text-gray-800 italic">{{ rating.comment }}</p>
+        </div>
+    </div>
+
 
     </div>
     <Footer/>
@@ -74,13 +130,15 @@
   import { route } from 'ziggy-js';
   import { loadStripe } from '@stripe/stripe-js'
     import axios from 'axios'
-    import { computed } from 'vue'
+    import { ref, computed } from 'vue'
 
   const props = defineProps({
     course: Object,
     authUser : Object,
     isEnrolled: Boolean,
+    averageRating: Number,
   })
+  console.log('Ratings:', props.course.ratings)
 
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY)
 
@@ -101,21 +159,35 @@
     }
 }
 
-const alertLoginRequired = () => {
-  const loginUrl = route('login.view')
-  const confirmLogin = confirm("⚠️ You must be logged in to purchase this course.\n\nWould you like to go to the login page now?")
-  if (confirmLogin) {
-    window.location.href = loginUrl
-  }
-}
+    const alertLoginRequired = () => {
+    const loginUrl = route('login.view')
+    const confirmLogin = confirm("⚠️ You must be logged in to purchase this course.\n\nWould you like to go to the login page now?")
+    if (confirmLogin) {
+        window.location.href = loginUrl
+    }
+    }
 
-const queryParams = new URLSearchParams(window.location.search)
-const success = queryParams.get('success') === 'true'
+    const queryParams = new URLSearchParams(window.location.search)
+    const success = queryParams.get('success') === 'true'
 
-const canAccessLessons = computed(() => {
-  if (!props.authUser) return false
-  if (props.authUser.id === props.course.teacher_id) return true
-  return props.isEnrolled
-})
+    const canAccessLessons = computed(() => {
+    if (!props.authUser) return false
+    if (props.authUser.id === props.course.teacher_id) return true
+    return props.isEnrolled
+    })
+
+    const newRating = ref({
+    rating: 5,
+    comment: ''
+    })
+
+    const submitRating = async () => {
+    try {
+        await axios.post(`/courses/${props.course.id}/ratings`, newRating.value)
+        window.location.reload()
+    } catch (err) {
+        console.error('Rating submission failed:', err)
+    }
+    }
 
   </script>

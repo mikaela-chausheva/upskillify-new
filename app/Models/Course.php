@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// use App\Model\Lesson;
+// use App\Model\Rating;
 
 
 class Course extends Model
@@ -26,6 +26,16 @@ class Course extends Model
     public function students()
     {
         return $this->belongsToMany(User::class, 'enrollments')->withTimestamps();
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating');
     }
 
 }

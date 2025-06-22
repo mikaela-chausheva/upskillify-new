@@ -8,6 +8,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\IsAdmin;
 
@@ -53,6 +54,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/courses/{course}/lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('lessons.edit');
     Route::put('/courses/{course}/lessons/{lesson}', [LessonController::class, 'update'])->name('lessons.update');
 });
+// Ratings
+Route::post('/courses/{course}/ratings', [RatingController::class, 'store'])->middleware('auth');
+
 // Admin
 Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminUserController::class, 'dashboard'])->name('dashboard');

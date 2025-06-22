@@ -87,7 +87,7 @@ class CourseController extends Controller
 
     public function viewSingleCourse(Course $course)
     {
-        $course->load('lessons');
+        $course->load('lessons', 'ratings.user');
 
         $isEnrolled = Auth::check() && Enrollment::where('user_id', Auth::id())
             ->where('course_id', $course->id)
@@ -103,10 +103,14 @@ class CourseController extends Controller
             $isEnrolled = true; // update state after inserting
         }
 
+        $averageRating = $course->ratings()->avg('rating');
+
+
         return Inertia::render('Courses/ShowCourse', [
             'course' => $course,
             'authUser' => Auth::user(),
             'isEnrolled' => $isEnrolled,
+            'averageRating' => round($averageRating, 1),
         ]);
     }
 
