@@ -9,6 +9,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\Api\MessageController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\IsAdmin;
 
@@ -68,6 +69,11 @@ Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->gr
 Route::post('/courses/{course}/checkout', [PaymentController::class, 'createCheckoutSession'])
     ->middleware('auth')
     ->name('courses.checkout');
+// Chat
+Route::middleware('auth')->group(function () {
+    Route::get('/courses/{id}/messages', [MessageController::class, 'index']);
+    Route::post('/courses/{id}/messages', [MessageController::class, 'store']);
+});
 
 
 

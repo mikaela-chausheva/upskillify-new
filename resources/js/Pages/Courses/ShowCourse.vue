@@ -1,4 +1,5 @@
 <template>
+    <div class="min-h-screen flex flex-col">
     <Navbar />
     <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-xl mt-8">
       <img :src="course.photo_url" alt="Course Image" class="rounded-lg w-full h-64 object-cover mb-6" />
@@ -117,15 +118,26 @@
             <p class="text-gray-800 italic">{{ rating.comment }}</p>
         </div>
     </div>
-
-
     </div>
-    <Footer/>
+
+    <!-- Floating chat -->
+    <Chat
+      v-if="canAccessLessons"
+      :course-id="course.id"
+      :user-id="authUser?.id"
+      :user-name="authUser?.first_name || authUser?.name"
+    />
+
+    <Footer class="mt-auto" />
+</div>
   </template>
+
+
 
   <script setup>
   import Navbar from '@/Components/Navbar.vue';
   import Footer from '@/Components/Footer.vue'
+  import Chat from '@/Components/Chat.vue'
   import { Link } from '@inertiajs/vue3';
   import { route } from 'ziggy-js';
   import { loadStripe } from '@stripe/stripe-js'

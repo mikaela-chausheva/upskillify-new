@@ -4,6 +4,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 import { ZiggyVue } from 'ziggy-js';
 import { Ziggy } from './ziggy'
 import '../css/app.css'
+// import './bootstrap'
 
 // Optional: show progress bar during page loads
 InertiaProgress.init()
