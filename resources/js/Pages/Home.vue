@@ -19,11 +19,11 @@
             class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32"
           >
             <!-- Background image -->
-            <!-- <img
-              src=""
+            <img
+            :src="vectorImage"
               alt=""
-              class="absolute inset-0 -z-10 size-full object-cover object-right md:object-center"
-            /> -->
+              class="absolute inset-0 -z-10 size-full object-cover object-right md:object-center opacity-30"
+            />
 
             <!-- Gradient -->
             <div
@@ -105,7 +105,7 @@
 
     <!-- Left: Image -->
     <div>
-        <!-- <img :src="learners" alt="Learners" class="w-full rounded-lg shadow-md" /> -->
+        <img src="https://smowl.net/wp-content/uploads/2024/07/digital-learners-characteristics.jpg" alt="Learners" class="w-full rounded-lg shadow-md" />
 
     </div>
 
@@ -212,6 +212,7 @@
   import { Link } from '@inertiajs/vue3'
   import Navbar from '@/Components/Navbar.vue'
   import Footer from '@/Components/Footer.vue'
+  import vectorImage from '@/images/Vector_2646.jpg'
 //   import learners from '@/images/learners.png'
 
   const props = defineProps({
